@@ -6,7 +6,7 @@
     "test:project": "tsx test/scanners/projectScanner.test.ts",
     "test:file": "tsx test/scanners/fileScanner.test.ts",
     "test:import": "tsx test/scanners/importScanner.test.ts",
-    "test": "npm run test:project && npm run test:file && npm run test:import && tsx lib/core/analyzer.ts",
+    "test": "npm run test:project && npm run test:file && npm run test:import",
     "cli": "tsx lib/bin.ts"
   },
   "keywords": [],

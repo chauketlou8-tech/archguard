@@ -29,7 +29,7 @@ import projectScanner from "./projectScanner"
 import scanner from "../utils/scanner"
 
 export default function fileScanner() {
-    const folders = projectScanner("../NexusMarketplace")!;
+    const folders = projectScanner("../../NexusMarketplace")!;
     const folderFileMap: Record<string, string[]> = {}
 
     for (const folder of folders) {

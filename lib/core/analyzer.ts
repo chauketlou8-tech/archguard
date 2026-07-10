@@ -49,5 +49,4 @@ function analyse() {
     }
 }
 
-const analysis = analyse();
-export default analysis;
+export default analyse;
