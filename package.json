@@ -3,10 +3,22 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:project": "tsx test/scanners/projectScanner.test.ts",
+    "test:file": "tsx test/scanners/fileScanner.test.ts",
+    "test:import": "tsx test/scanners/importScanner.test.ts",
+    "test": "npm run test:project && npm run test:file && npm run test:import && tsx lib/core/analyzer.ts",
+    "cli": "tsx lib/bin.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.2.3"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.0",
+    "typescript": "^7.0.2"
+  }
 }

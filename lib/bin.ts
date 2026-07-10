@@ -1,0 +1,4 @@
+/*
+executable script for the application
+starts the application
+ */

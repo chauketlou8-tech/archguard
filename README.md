@@ -198,6 +198,8 @@ Interactive reports with dependency graphs and architecture summaries.
 * Import validation
 * Configuration generation
 
+### Future
+
 ### Version 1.5
 
 * Circular dependency detection
@@ -214,8 +216,6 @@ Interactive reports with dependency graphs and architecture summaries.
 * VS Code extension
 * GitHub Action
 * Architecture drift analysis
-
-### Future
 
 * Plugin ecosystem
 * AI-assisted architecture recommendations
