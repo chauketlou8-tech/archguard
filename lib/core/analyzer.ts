@@ -1,10 +1,13 @@
-// Analyses the imports cleanly
+/**
+ * Analyses the imports cleanly
+  */
+
 import importScanner from "../scanner/importScanner";
 import import_type_classifier from "../utils/import_type_classifier";
 import syntax_type_classifier from "../utils/syntax_type_classifier";
 import type { obj } from "../types/obj";
 
-function analyse() {
+export default function analyse() {
     //the map of the imports and their folder
     const analyticMap: Record<string, string[]> = importScanner();
 
@@ -14,6 +17,7 @@ function analyse() {
 
     for (const [key,values] of Object.entries(analyticMap)) {
         for (const value of values) {
+            //extracts the import
             const match = value.match(/require\(['"](.+?)['"]\)|import\s+(?:.+?\s+from\s+)?['"](.+?)['"]/);
 
             if (match) {
@@ -48,5 +52,3 @@ function analyse() {
         internal,
     }
 }
-
-export default analyse;
