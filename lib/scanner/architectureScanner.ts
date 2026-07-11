@@ -7,12 +7,17 @@ import ArchGuardTreeBuilder from "../builder/treeBuilder"
 import relationships from "../utils/relationships";
 
 
-export default function architectureScanner(root: string): Record<string, number> {
-    const tree = ArchGuardTreeBuilder(root)
+export default function architectureScanner(root: string): { relationshipMap: Record<string, number>, layerLookup: Record<string, string> } {
+    const builder = ArchGuardTreeBuilder(root);
+    const tree = builder.tree
+    const layerLookup = builder.layerLookup;
     const relationshipMap: Record<string, number> = {};
 
 
     relationships(tree, relationshipMap);
 
-    return relationshipMap;
+    return {
+        relationshipMap,
+        layerLookup
+    };
 }
