@@ -2,12 +2,11 @@
 this file takes the scanned folder structure and build the architecture
  */
 
-import { obj } from "../types/obj";
-import architectureScanner from "../scanner/architectureScanner";
+import type { architecture } from "../types/architecture";
+import architectures from "../constants/architectures";
 
-export default function architectureBuilder(root: string) {
+// @ts-ignore
+export default function architectureDetector(relationshipMap: Record<string, number>): architecture {
 
-    const { relationshipMap } = architectureScanner(root);
-    console.log(relationshipMap);
 
 }

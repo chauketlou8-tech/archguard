@@ -1,7 +1,7 @@
 import { ArchGuardTree } from "../classes/ArchGuardTree";
 import path from "path"
 
-export default function insertPathToTree(p: string, root: string, tree: ArchGuardTree, layerLookup: Record<string, string>) {
+export default function insertPathToTree(p: string, root: string, tree: ArchGuardTree) {
     const childNodes = path.relative(root, p).split(path.sep).filter(child => {
         if (child !== ".." && child !== ".")  return child;
     }).map(child => {
@@ -23,9 +23,6 @@ export default function insertPathToTree(p: string, root: string, tree: ArchGuar
 
         if (!found) {
             current.children.push(node);
-            if (!layerLookup[node.root]) {
-                layerLookup[node.root] = current.root
-            }
 
             current = node
         }

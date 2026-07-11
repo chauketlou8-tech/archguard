@@ -5,21 +5,23 @@
 
 import { obj } from "../types/obj";
 import path from "path"
+import resolveImport from "./resolveImport";
 
 export default function checkLayers(imports: obj[], relationshipMap: Record<string, number>, layerLookup: Record<string, string>): void {
     for (const im of imports) {
         const sourceLayer = layerLookup[im.source_file];
-        const targetFile = path.resolve(path.dirname(im.source_file), im.import_name);
+        const targetFile = resolveImport(path.resolve(path.dirname(im.source_file), im.import_name));
+
+        if (!targetFile) {
+            continue;
+        }
+
         const targetLayer = layerLookup[targetFile];
 
-        if (!relationshipMap[`${sourceLayer} -> ${targetLayer}`]){
-            relationshipMap[`${sourceLayer} -> ${targetLayer}`] = 1
-        }
-        else {
-            relationshipMap[`${sourceLayer} -> ${targetLayer}`]++;
+        if (!targetLayer) {
+            continue;
         }
 
-        console.log(im.source_file);
-        console.log(targetFile);
+        relationshipMap[`${sourceLayer} -> ${targetLayer}`] = (relationshipMap[`${sourceLayer} -> ${targetLayer}`] ?? 0) + 1;
     }
 }

@@ -29,7 +29,7 @@ import projectScanner from "./projectScanner"
 import scanner from "../utils/scanner"
 
 export default function fileScanner() {
-    const folders = projectScanner("../../APWA")!;
+    const folders = projectScanner("C:\\Users\\chauk\\OneDrive\\Desktop\\Projects\\APWA")!;
     const folderFileMap: Record<string, string[]> = {}
 
     for (const folder of folders) {

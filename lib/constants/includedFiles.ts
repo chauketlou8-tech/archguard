@@ -5,5 +5,6 @@ export default new Set([
     ".jsx",
     ".java",
     ".py",
-    ".rs"
+    ".rs",
+    ""
 ])
