@@ -1,4 +1,26 @@
-import LayeredGraph from "../../classes/LayeredGraph"
+/**
+ * LAYERED
+---------------------------------------------------------------------------------------------------------------------
+✓ Dependencies flow only downward
+✓ No circular dependencies between layers
+✓ Presentation depends on Services
+✓ Services depend on Repositories
+✓ Repositories depend on Database
+✓ Lower layers never depend on higher layers
+✓ Layers have clear responsibilities
+✓ Few or no cross-layered shortcuts
+
+High Score Example:
+    Presentation
+    ↓
+Services
+    ↓
+Repositories
+    ↓
+Database
+ **/
+
+import LayeredGraph from "../classes/DirectedGraph"
 
 export default function update_layered(keys: string[], scores: Record<string, number>, graph: LayeredGraph) {
     /**
@@ -20,12 +42,6 @@ export default function update_layered(keys: string[], scores: Record<string, nu
         }
     }
 
-    // Build graph once
-    for (const key of keys) {
-        const [from, to] = key.split(" -> ");
-        graph.addEdge(from, to);
-    }
-
     /**
      * Rule 2: Detect cyclic dependencies.
      *
@@ -34,7 +50,7 @@ export default function update_layered(keys: string[], scores: Record<string, nu
      * the architecture contains a cycle and violates the layered model.
      */
     if (graph.hasCycle()) {
-        scores["layered"]--;
+        scores["layered"] -= 5;
     }
 
     /**

@@ -3,7 +3,7 @@ This function builds the ArchGuard tree and returns it
  **/
 
 import insertPathToTree from "../utils/insertPathToTree";
-import {ArchGuardTree} from "../classes/ArchGuardTree";
+import { ArchGuardTree } from "../classes/ArchGuardTree";
 import fileScanner from "../scanner/fileScanner";
 import folderScanner from "../scanner/projectScanner"
 import path from "path";

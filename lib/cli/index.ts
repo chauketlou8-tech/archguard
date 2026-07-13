@@ -8,7 +8,7 @@ Its job is to:
  **/
 
 import createConfig from "../config/createConfig";
-import start from "../../index"
+import start from "../bin"
 
 const command = process.argv.slice(2)[0]
 

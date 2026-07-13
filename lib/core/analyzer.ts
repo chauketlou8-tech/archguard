@@ -12,8 +12,8 @@ export default function analyse() {
     const analyticMap: Record<string, string[]> = importScanner();
 
     const builtins: obj[] = [];
-    const external: obj[] = [];
-    const internal: obj[] = [];
+    const externals: obj[] = [];
+    const internals: obj[] = [];
 
     for (const [key,values] of Object.entries(analyticMap)) {
         for (const value of values) {
@@ -34,10 +34,10 @@ export default function analyse() {
                 }
 
                 if (import_type === "internal") {
-                    internal.push(obj)
+                    internals.push(obj)
                 }
                 else if (import_type === "external") {
-                    external.push(obj)
+                    externals.push(obj)
                 }
                 else {
                     builtins.push(obj)
@@ -48,7 +48,7 @@ export default function analyse() {
 
     return {
         builtins,
-        external,
-        internal,
+        externals,
+        internals,
     }
 }

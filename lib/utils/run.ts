@@ -6,21 +6,32 @@ import analyse from "../core/analyzer";
 import architectureScanner from "../scanner/architectureScanner";
 import checkLayers from "./checkLayers";
 import architectureDetector from "../core/architectureDetector";
+import dependencyBuilder from "../builder/dependencyBuilder";
+import RuleEngine from "../core/ruleEngine";
+import DirectedGraph from "../classes/DirectedGraph";
 
 export default function runArchGuard(root: string) {
     const analysis = analyse();
+    const scores: Record<string, number> = {};
+    const LayeredGraph: DirectedGraph = new DirectedGraph();
+    const FeaturedGraph: DirectedGraph = new DirectedGraph();
 
     const { layerLookup, relationshipMap } = architectureScanner(root);
+    const keys = Object.keys(relationshipMap);
 
-    checkLayers(analysis.internal, relationshipMap, layerLookup);
+    checkLayers(analysis.internals, relationshipMap, layerLookup);
+    const dependencies = dependencyBuilder(analysis.internals);
 
-    const architecture = architectureDetector(relationshipMap);
+    for (const key of keys) {
+        const [from, to] = key.split(" -> ");
+        LayeredGraph.addEdge(from, to);
+    }
 
-    /*const violations = ruleEngine(
-        architecture,
-        relationshipMap,
-        analysis
-    );
+    for (const dependency of dependencies) {
+        FeaturedGraph.addEdge(dependency.sourceFeature, dependency.targetFeature);
+    }
 
-    reporter(violations);*/
+    const architecture = architectureDetector(relationshipMap, dependencies, scores, keys, LayeredGraph, FeaturedGraph);
+
+    RuleEngine(architecture, keys, LayeredGraph, dependencies, FeaturedGraph);
 }
